@@ -92,11 +92,11 @@ def search_sku(carry, copy_mylist, SKU_Store) :
 
 
         store_dict = {
-            "Harga" : harga,
-            "Jakarta Pusat" : jakpus_stock,
-            "Jakarta Utara" : jakut_stock,
-            "Tangerang" : tangerang_stock,
-            "Cikupa" : cikupa_stock
+            "Harga" : harga.replace("Rp. ","").replace(".",""),
+            "Jakarta Pusat" : jakpus_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
+            "Jakarta Utara" : jakut_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
+            "Tangerang" : tangerang_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
+            "Cikupa" : cikupa_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif")
         }
 
         SKU_Store[sku] = store_dict
@@ -117,3 +117,5 @@ def convert_to_excel() :
     sleep(5)
 
     driver.quit()
+
+convert_to_excel()
