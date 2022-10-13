@@ -10,8 +10,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from variables import mylist
 
 
-service = ChromeService(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+# service = ChromeService(executable_path=ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome('/Users/fdn-hengky/Learn/001 - Open Browser/chromedriver') 
 
 def test_driver_manager_chrome():
 
@@ -85,6 +86,7 @@ def search_sku(carry, copy_mylist, SKU_Store) :
 
         harga = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div/*[@class='product-list__price']").text
 
+        online_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[1]/div[2]/span[1]").text
         jakpus_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[2]/div[2]/span[1]").text
         jakut_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[4]/div[2]/span[1]").text
         tangerang_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[5]/div[2]/span[1]").text
@@ -93,6 +95,7 @@ def search_sku(carry, copy_mylist, SKU_Store) :
 
         store_dict = {
             "Harga" : harga.replace("Rp. ","").replace(".",""),
+            "Online" : online_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Jakarta Pusat" : jakpus_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Jakarta Utara" : jakut_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Tangerang" : tangerang_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
