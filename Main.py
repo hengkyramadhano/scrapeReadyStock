@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -9,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from variables import mylist
 
+start_time = time.time()
 
 # service = ChromeService(executable_path=ChromeDriverManager().install())
 # driver = webdriver.Chrome(service=service)
@@ -88,6 +90,7 @@ def search_sku(carry, copy_mylist, SKU_Store) :
 
         online_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[1]/div[2]/span[1]").text
         jakpus_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[2]/div[2]/span[1]").text
+        jakbar_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[3]/div[2]/span[1]").text
         jakut_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[4]/div[2]/span[1]").text
         tangerang_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[5]/div[2]/span[1]").text
         cikupa_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[6]/div[2]/span[1]").text
@@ -97,6 +100,7 @@ def search_sku(carry, copy_mylist, SKU_Store) :
             "Harga" : harga.replace("Rp. ","").replace(".",""),
             "Online" : online_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Jakarta Pusat" : jakpus_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
+            "Jakarta Barat" : jakbar_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Jakarta Utara" : jakut_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Tangerang" : tangerang_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Cikupa" : cikupa_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif")
@@ -120,5 +124,6 @@ def convert_to_excel() :
     sleep(5)
 
     driver.quit()
+    print("--- %s minute ---" % (time.time() - start_time)/60)
 
 convert_to_excel()
