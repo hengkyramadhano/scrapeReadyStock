@@ -1,5 +1,4 @@
 import pandas as pd
-import time
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -9,8 +8,6 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from variables import mylist
-
-start_time = time.time()
 
 # service = ChromeService(executable_path=ChromeDriverManager().install())
 # driver = webdriver.Chrome(service=service)
@@ -32,7 +29,7 @@ def test_driver_manager_chrome():
     submit_button.click()
 
     # Button Mengerti
-    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='headlessui-popover-panel-6']/div/div[2]/button"))).click()
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='headlessui-popover-panel-3']/div/div[2]/button"))).click()
 
     # -----------------------------------------------------------------------------------------------------------
 
@@ -124,6 +121,5 @@ def convert_to_excel() :
     sleep(5)
 
     driver.quit()
-    print("--- %s minute ---" % (time.time() - start_time)/60)
 
 convert_to_excel()
