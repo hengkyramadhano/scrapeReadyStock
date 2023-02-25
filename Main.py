@@ -94,7 +94,7 @@ def search_sku(carry, copy_mylist, SKU_Store) :
 
 
         store_dict = {
-            "Harga" : harga.replace("Rp. ","").replace(".",""),
+            "Harga" : int(harga.replace("Rp. ","").replace(".","")),
             "Online" : online_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Jakarta Pusat" : jakpus_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
             "Jakarta Barat" : jakbar_stock.replace("Tersedia","Aktif").replace("Habis","Nonaktif").replace("On Restock","Nonaktif"),
