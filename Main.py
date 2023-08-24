@@ -29,7 +29,7 @@ def test_driver_manager_chrome():
     submit_button.click()
 
     # Button Mengerti
-    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='headlessui-popover-panel-3']/div/div[2]/button"))).click()
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='headlessui-popover-panel-:r1:']/div/div[2]/button"))).click()
 
     # -----------------------------------------------------------------------------------------------------------
 
@@ -116,7 +116,7 @@ def convert_to_excel() :
 
     #convert into excel
     df.to_excel('data.xlsx')
-    print("Dictionary converted into excel...")
+    print("Dictionary converted into excel of data.xlsx...")
 
     sleep(5)
 

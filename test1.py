@@ -7,3 +7,6 @@ for item in range(bagi_bulat):
 
 print(f"Total mylist: {bagi_bulat}")
 
+count_str = "Geng rumahan"
+
+print(count_str.count(""))

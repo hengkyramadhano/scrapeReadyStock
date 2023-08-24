@@ -3,7 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 # Send a request to the website
-url = 'https://www.jakartanotebook.com/p/biutte.co-pembersih-telinga-korek-kuping-ear-wax-picker-7-pcs-jc7-silver'
+url = 'https://www.jakartanotebook.com/p/alat-garuk-punggung-telescopic-stainless-steel-b01er-multi-color'
 response = requests.get(url)
 
 # Parse the HTML content of the page
@@ -17,16 +17,21 @@ sku = soup.find('span', {'class': 'bwqOiD'}).text
 sku_dict = {"SKU" : sku}
 
 dt = ""
-intro = soup.article.p.text
-dt = f"{dt + intro}\n\n"
 
-dt = f"{dt}Fitur\n"
-title_fitur = soup.article.table.tbody.find_all('div')
-desc_fitur = soup.article.table.tbody.find_all('p')
-fj = 0
-for de3 in title_fitur:
-    dt = f"{dt + de3.text}\n{desc_fitur[fj].text}\n\n" #print(f"{spec.text} : {data_isi_spec[jml].text}")
-    fj +=1
+try:
+    intro = soup.article.p.text
+    dt = f"{dt + intro}\n\n"
+    
+    dt = f"{dt}Fitur\n"
+    title_fitur = soup.article.table.tbody.find_all('div')
+    desc_fitur = soup.article.table.tbody.find_all('p')
+    fj = 0
+    for de3 in title_fitur:
+        dt = f"{dt + de3.text}\n{desc_fitur[fj].text}\n\n" #print(f"{spec.text} : {data_isi_spec[jml].text}")
+        fj +=1
+except AttributeError as e:
+    print(f"Error: {e}")
+            
 
 # Rincian
 data_ele = soup.find('div', {'class': 'bqlxyt'}).p.string
