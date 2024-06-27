@@ -29,10 +29,12 @@ def test_driver_manager_chrome():
     print(title + driver.current_url)
     driver.get("https://www.jakartanotebook.com/auth/login")
 
+    f = open("credentials.txt", "r")
+
     imel = driver.find_element(by=By.NAME, value="username")
-    imel.send_keys("hengkyramadhano@gmail.com")
+    imel.send_keys(f.readline())
     pwd = driver.find_element(by=By.NAME, value="password")
-    pwd.send_keys("Jakarta48@")
+    pwd.send_keys(f.readline())
 
     submit_button = driver.find_element(by=By.XPATH, value="//*[@id='__next']/div/div[2]/div[1]/div/div[2]/div/form/div[3]/button")
     submit_button.click()
