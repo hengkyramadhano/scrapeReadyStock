@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -9,9 +10,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from variables import mylist
 
+start_time = time.time()
+
 # service = ChromeService(executable_path=ChromeDriverManager().install())
 # driver = webdriver.Chrome(service=service)
-driver = webdriver.Chrome('/Users/fdn-hengky/Learn/001 - Open Browser/chromedriver') 
+# driver = webdriver.Chrome('/Users/fdn-hengky/Learn/001 - Open Browser/chromedriver') 
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+driver = webdriver.Chrome(options=options)
+
+# driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
 
 def test_driver_manager_chrome():
 
@@ -29,7 +38,7 @@ def test_driver_manager_chrome():
     submit_button.click()
 
     # Button Mengerti
-    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='headlessui-popover-panel-:r1:']/div/div[2]/button"))).click()
+    WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='headlessui-popover-panel-:r0:']/div/div[2]/button"))).click()
 
     # -----------------------------------------------------------------------------------------------------------
 
@@ -83,7 +92,8 @@ def search_sku(carry, copy_mylist, SKU_Store) :
         sku = driver.find_element(by=By.XPATH, value=f"//div[@class='product-list-wrapper']/div[{j+1}]/div[1]").get_attribute("textContent")
         # print(f"getSKU: {sku}")
 
-        harga = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div/*[@class='product-list__price']").text
+        # harga = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div/*[@class='product-list__price']").text
+        harga = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div/div/span").text
 
         online_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[1]/div[2]/span[1]").text
         jakpus_stock = driver.find_element(by=By.XPATH, value=f"//*[@class='product-list-wrapper']/div[{j+1}]/div[4]/div[2]/div/div[2]/div[2]/span[1]").text
@@ -123,3 +133,5 @@ def convert_to_excel() :
     driver.quit()
 
 convert_to_excel()
+
+print("--- %s seconds ---" % (time.time() - start_time))
